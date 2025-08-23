@@ -3,14 +3,14 @@ module github.com/d--j/go-milter/integration
 go 1.24.0
 
 require (
-	github.com/d--j/go-milter v0.9.3
+	github.com/d--j/go-milter v0.10.0
 	github.com/emersion/go-message v0.18.2
 	github.com/emersion/go-sasl v0.0.0-20241020182733-b788ff22d5a6
-	github.com/emersion/go-smtp v0.21.3
-	golang.org/x/text v0.24.0
-	golang.org/x/tools v0.32.0
+	github.com/emersion/go-smtp v0.24.0
+	golang.org/x/text v0.28.0
+	golang.org/x/tools v0.36.0
 )
 
-require golang.org/x/net v0.39.0 // indirect
+require golang.org/x/net v0.43.0 // indirect
 
 replace github.com/d--j/go-milter => ../
