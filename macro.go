@@ -294,7 +294,6 @@ func removeEmpty(str []string) []string {
 	if len(str) == 0 {
 		return []string{}
 	}
-	// Optimize: single pass without intermediate slice
 	result := make([]string, 0, len(str))
 	for _, s := range str {
 		if len(s) > 0 {
@@ -308,7 +307,6 @@ func removeDuplicates(str []string) []string {
 	if len(str) == 0 {
 		return []string{}
 	}
-	// Optimize: single pass without intermediate slice
 	found := make(map[string]bool, len(str))
 	result := make([]string, 0, len(str))
 	for _, v := range str {

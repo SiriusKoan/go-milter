@@ -124,7 +124,6 @@ func (m *serverSession) negotiate(msg *wire.Message, milterVersion uint32, milte
 
 	// prepare response data
 	var buffer bytes.Buffer
-	// Optimize: use direct byte operations instead of binary.Write for better performance
 	for _, value := range []uint32{m.version, uint32(m.actions), uint32(m.protocol) | sizeMask} {
 		buffer.Write([]byte{byte(value >> 24), byte(value >> 16), byte(value >> 8), byte(value)})
 	}
