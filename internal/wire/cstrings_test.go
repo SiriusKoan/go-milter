@@ -78,3 +78,32 @@ func TestReadCString(t *testing.T) {
 		})
 	}
 }
+
+// Benchmark for AppendCString function
+func BenchmarkAppendCString(b *testing.B) {
+	dest := make([]byte, 0, 100)
+	testString := "test string value"
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		dest = dest[:0]
+		_ = AppendCString(dest, testString)
+	}
+}
+
+// Benchmark for DecodeCStrings function
+func BenchmarkDecodeCStrings(b *testing.B) {
+	testData := []byte("string1\x00string2\x00string3\x00string4\x00")
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		_ = DecodeCStrings(testData)
+	}
+}
+
+// Benchmark for ReadCString function
+func BenchmarkReadCString(b *testing.B) {
+	testData := []byte("test string\x00remaining data")
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		_ = ReadCString(testData)
+	}
+}

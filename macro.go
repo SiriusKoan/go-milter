@@ -294,34 +294,28 @@ func removeEmpty(str []string) []string {
 	if len(str) == 0 {
 		return []string{}
 	}
-	indexesToKeep := make([]int, 0, len(str))
-	for i, s := range str {
+	// Optimize: single pass without intermediate slice
+	result := make([]string, 0, len(str))
+	for _, s := range str {
 		if len(s) > 0 {
-			indexesToKeep = append(indexesToKeep, i)
+			result = append(result, s)
 		}
 	}
-	r := make([]string, 0, len(indexesToKeep))
-	for _, index := range indexesToKeep {
-		r = append(r, str[index])
-	}
-	return r
+	return result
 }
 
 func removeDuplicates(str []string) []string {
 	if len(str) == 0 {
 		return []string{}
 	}
+	// Optimize: single pass without intermediate slice
 	found := make(map[string]bool, len(str))
-	indexesToKeep := make([]int, 0, len(str))
-	for i, v := range str {
+	result := make([]string, 0, len(str))
+	for _, v := range str {
 		if !found[v] {
-			indexesToKeep = append(indexesToKeep, i)
+			result = append(result, v)
 			found[v] = true
 		}
 	}
-	noDuplicates := make([]string, len(indexesToKeep))
-	for i, index := range indexesToKeep {
-		noDuplicates[i] = str[index]
-	}
-	return noDuplicates
+	return result
 }
