@@ -34,7 +34,7 @@ func ReadCString(data []byte) string {
 // AppendCString appends a C style string to the buffer and returns it (like append does).
 // It is assumed that s does not contain null-bytes.
 func AppendCString(dest []byte, s string) []byte {
-	dest = append(dest, []byte(s)...)
+	dest = append(dest, s...)
 	dest = append(dest, 0x00)
 	return dest
 }

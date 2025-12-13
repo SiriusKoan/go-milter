@@ -587,3 +587,21 @@ func Test_removeEmpty(t *testing.T) {
 		})
 	}
 }
+
+// Benchmark for removeEmpty function
+func BenchmarkRemoveEmpty(b *testing.B) {
+	testData := []string{"", "value1", "", "value2", "value3", "", "value4", "value5", "", "value6"}
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		_ = removeEmpty(testData)
+	}
+}
+
+// Benchmark for removeDuplicates function
+func BenchmarkRemoveDuplicates(b *testing.B) {
+	testData := []string{"a", "b", "a", "c", "b", "d", "e", "a", "f", "c"}
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		_ = removeDuplicates(testData)
+	}
+}

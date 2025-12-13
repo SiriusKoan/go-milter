@@ -125,17 +125,14 @@ func (m *serverSession) negotiate(msg *wire.Message, milterVersion uint32, milte
 	// prepare response data
 	var buffer bytes.Buffer
 	for _, value := range []uint32{m.version, uint32(m.actions), uint32(m.protocol) | sizeMask} {
-		if err := binary.Write(&buffer, binary.BigEndian, value); err != nil {
-			return nil, fmt.Errorf("milter: negotiate: %w", err)
-		}
+		buffer.Write([]byte{byte(value >> 24), byte(value >> 16), byte(value >> 8), byte(value)})
 	}
 	// send the macros we want to have in the response
 	if macroRequests != nil && mtaActionMask&OptSetMacros != 0 {
 		for st := 0; st < int(StageEndMarker) && st < len(macroRequests); st++ {
 			if macroRequests[st] != nil && len(macroRequests[st]) > 0 {
-				if err := binary.Write(&buffer, binary.BigEndian, uint32(st)); err != nil {
-					return nil, fmt.Errorf("milter: negotiate: %w", err)
-				}
+				stValue := uint32(st)
+				buffer.Write([]byte{byte(stValue >> 24), byte(stValue >> 16), byte(stValue >> 8), byte(stValue)})
 				buffer.WriteString(strings.Join(macroRequests[st], " "))
 				buffer.WriteByte(0)
 			}
